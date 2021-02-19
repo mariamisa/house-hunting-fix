@@ -48,8 +48,6 @@ function Navbar() {
       await Axios('api/v1/logout');
       setIsAuth(false);
       setLoading(false);
-      setOpen(true);
-      history.push(HOME_PAGE);
     } catch (err) {
       setError('Internal server Error');
       setLoading(false);
@@ -78,8 +76,7 @@ function Navbar() {
               <Button
                 variant="outlined"
                 color="secondary"
-                onClick=""
-                href={SIGNUP_PAGE}
+                onClick={() => history.push(SIGNUP_PAGE)}
               >
                 SignUp
               </Button>
@@ -105,8 +102,8 @@ function Navbar() {
             </>
           )}
           <Snackbar open={open} autoHideDuration={8000} onClose={handleClose}>
-            <Alert onClose={handleClose} severity={error ? 'error' : 'success'}>
-              {error || 'LogOut Successfully!'}
+            <Alert onClose={handleClose} severity="error">
+              {error}
             </Alert>
           </Snackbar>
         </Toolbar>
