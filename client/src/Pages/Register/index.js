@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+
 import Axios from 'axios';
 import Alert from '@material-ui/lab/Alert';
+import Snackbar from '@material-ui/core/Snackbar';
 import Typography from '@material-ui/core/Typography';
 
 import validationSchema from '../../Utils/validations/register';
@@ -14,20 +16,29 @@ import useStyles from './style';
 function Register() {
   const classes = useStyles();
 
-  const [username, setUsername] = useState();
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [mobile, setMobile] = useState('');
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState();
+  const [open, setOpen] = useState(false);
 
   const clear = () => {
     setUsername('');
     setEmail('');
     setPassword('');
+    setMobile('');
     setConfirmPassword('');
     setError(null);
+  };
+
+  const handleClose = (reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
   };
 
   const handleChange = ({ target: { value, name } }) => {
@@ -68,6 +79,7 @@ function Register() {
         abortEarly: false,
       });
       await Axios.post('api/v1/signup', userDate);
+      setOpen(true);
       clear();
       setLoading(false);
     } catch (err) {
@@ -134,18 +146,21 @@ function Register() {
           <Input
             className={classes.input}
             variant="outlined"
-            type="tel"
+            type="text"
             onChange={handleChange}
             value={mobile}
             label="mobile"
             name="mobile"
             required
           />
-          {error && (
-            <Alert className={classes.alert} severity="error">
-              {error}
+          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+            <Alert
+              className={classes.alert}
+              severity={error ? 'error' : 'success'}
+            >
+              {error || 'Congrats! Signed up Successfully'}
             </Alert>
-          )}
+          </Snackbar>
           <Button
             className={classes.button}
             variant="contained"

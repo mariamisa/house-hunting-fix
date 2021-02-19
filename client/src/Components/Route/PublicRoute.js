@@ -10,11 +10,7 @@ function PublicRoute({ component: Component, ...rest }) {
   const { isAuth, authLoading } = useContext(AuthContext);
   return (
     <Route {...rest}>
-      {!isAuth && !authLoading ? (
-        <Component />
-      ) : (
-        <Redirect to={{ pathname: HOME_PAGE }} />
-      )}
+      {!isAuth && !authLoading ? <Component /> : <Redirect to={HOME_PAGE} />}
     </Route>
   );
 }

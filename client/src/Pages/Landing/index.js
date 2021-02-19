@@ -59,7 +59,10 @@ function Landing() {
   return (
     <>
       <div className={classes.header}>
-        <div className={classes.searchBox}>
+        <div className={classes.searchBoxH}>
+          <Typography variant="h2" className={classes.headerTitle}>
+            Find your perfect house
+          </Typography>
           <Search onClick={handleSearchBar} />
         </div>
       </div>
