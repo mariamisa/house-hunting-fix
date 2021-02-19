@@ -2,7 +2,7 @@
 house-hunting App that facilitates to access and rent available homes
 
 ## Live demo :tv: 
-[Heroku link , Click here to visit our app](https://house-hunting-app.herokuapp.com/)
+[Heroku link , Click here to visit our app](https://house-hunting-fix.herokuapp.com/)
 
 use these credientials: <br>
 email: guest@guest.com
