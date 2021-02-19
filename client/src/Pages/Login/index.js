@@ -1,15 +1,12 @@
 import React, { useContext, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import Axios from 'axios';
 import Alert from '@material-ui/lab/Alert';
-import Snackbar from '@material-ui/core/Snackbar';
 import Typography from '@material-ui/core/Typography';
 
 import validationSchema from '../../Utils/validations/login';
 import Input from '../../Components/Input';
 import Button from '../../Components/Button';
 import { ReactComponent as SearchImg } from '../../Utils/images/house_searching.svg';
-import { HOME_PAGE } from '../../Utils/routes.constant';
 import Loading from '../../Components/Loading';
 
 import AuthContext from '../../Context/AuthContext';
@@ -17,25 +14,17 @@ import useStyles from './style';
 
 function Login() {
   const classes = useStyles();
-  const history = useHistory();
   const { setIsAuth } = useContext(AuthContext);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState();
   const [error, setError] = useState();
-  const [open, setOpen] = useState(false);
 
   const clear = () => {
     setEmail('');
     setPassword('');
     setError(null);
-  };
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setOpen(false);
   };
 
   const handleEmail = (event) => {
@@ -62,8 +51,6 @@ function Login() {
       clear();
       setIsLoading(false);
       setIsAuth(true);
-      setOpen(true);
-      history.push(HOME_PAGE);
     } catch (err) {
       setError(err.response ? err.response.data.message : err.errors[0]);
       setIsLoading(false);
@@ -98,11 +85,6 @@ function Login() {
             label="Password"
             required
           />
-          <Snackbar open={open} autoHideDuration={8000} onClose={handleClose}>
-            <Alert onClose={handleClose} severity="success">
-              Login Successfully!
-            </Alert>
-          </Snackbar>
           {error && (
             <Alert className={classes.alert} severity="error">
               {error}
