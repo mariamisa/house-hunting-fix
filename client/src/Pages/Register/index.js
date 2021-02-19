@@ -1,22 +1,18 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import Axios from 'axios';
 import Alert from '@material-ui/lab/Alert';
-import Snackbar from '@material-ui/core/Snackbar';
 import Typography from '@material-ui/core/Typography';
 
 import validationSchema from '../../Utils/validations/register';
 import { ReactComponent as SearchImg } from '../../Utils/images/house_searching.svg';
 import Input from '../../Components/Input';
 import Button from '../../Components/Button';
-import { LOGIN_PAGE } from '../../Utils/routes.constant';
 import Loading from '../../Components/Loading';
 
 import useStyles from './style';
 
 function Register() {
   const classes = useStyles();
-  const history = useHistory();
 
   const [username, setUsername] = useState();
   const [email, setEmail] = useState('');
@@ -25,7 +21,6 @@ function Register() {
   const [mobile, setMobile] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [open, setOpen] = useState(false);
 
   const clear = () => {
     setUsername('');
@@ -33,13 +28,6 @@ function Register() {
     setPassword('');
     setConfirmPassword('');
     setError(null);
-  };
-
-  const handleClose = (reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setOpen(false);
   };
 
   const handleChange = ({ target: { value, name } }) => {
@@ -80,10 +68,8 @@ function Register() {
         abortEarly: false,
       });
       await Axios.post('api/v1/signup', userDate);
-      setOpen(true);
       clear();
       setLoading(false);
-      history.push(LOGIN_PAGE);
     } catch (err) {
       setError(err.response ? err.response.data.message : err.errors[0]);
       setLoading(false);
@@ -155,11 +141,6 @@ function Register() {
             name="mobile"
             required
           />
-          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-            <Alert onClose={handleClose} severity="success">
-              Congrats! Signed up Successfully
-            </Alert>
-          </Snackbar>
           {error && (
             <Alert className={classes.alert} severity="error">
               {error}
