@@ -39,7 +39,12 @@ const useStyles = makeStyles((theme) => ({
   alertContainer: {
     marginTop: '2em',
   },
-  searchBox: {
+  headerTitle: {
+    marginBottom: 30,
+    color: 'white',
+    fontSize: 25,
+  },
+  searchBoxH: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
