@@ -1,6 +1,4 @@
 BEGIN;
-DROP TABLE IF EXISTS users,locations ,houses, favorites 
-CASCADE;
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
