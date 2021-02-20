@@ -18,15 +18,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/GSG-G9/house-hunting-app.git"
+    "url": "git+https://github.com/mariamisa/house-hunting-fix.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/GSG-G9/house-hunting-app/issues"
+    "url": "https://github.com/mariamisa/house-hunting-fix/issues"
   },
-  "homepage": "https://github.com/GSG-G9/house-hunting-app#readme",
+  "homepage": "https://github.com/mariamisa/house-hunting-fix#readme",
   "dependencies": {
     "bcrypt": "^5.0.0",
     "cloudinary": "^1.24.0",
