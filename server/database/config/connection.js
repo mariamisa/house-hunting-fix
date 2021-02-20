@@ -16,7 +16,7 @@ switch (NODE_ENV) {
   default:
     throw new Error('three is no database url  found ... ');
 }
-const option = {
+const options = {
   connectionString: dbUrl,
   ssl: {
     rejectUnauthorized: false,
