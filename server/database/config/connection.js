@@ -16,9 +16,11 @@ switch (NODE_ENV) {
   default:
     throw new Error('three is no database url  found ... ');
 }
-const options = {
+const option = {
   connectionString: dbUrl,
-  ssl: false,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 };
 const pool = new Pool(options);
 
