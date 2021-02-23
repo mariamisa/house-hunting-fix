@@ -1,5 +1,5 @@
-const { deleteHouse } = require('../../../database/queries/house');
-const boomify = require('../../../utils/boomify');
+const { deleteHouse } = require('../../database/queries/house');
+const boomify = require('../../utils/boomify');
 
 const deleteHouseController = async (req, res, next) => {
   try {

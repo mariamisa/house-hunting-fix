@@ -9,14 +9,14 @@ const {
   signupController,
   loginController,
   authController,
-} = require('../controller/routes/user');
+} = require('../controller/user');
 
 const {
   getAllHouses,
   getHouseByLocation,
   getNewestHouses,
   getHouseById,
-} = require('../controller/routes/house');
+} = require('../controller/house');
 
 router.get('/is-auth', authController);
 router.post('/signup', signupValidation, signupController);

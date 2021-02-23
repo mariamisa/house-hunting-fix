@@ -1,5 +1,5 @@
-const boomify = require('../../../utils/boomify');
-const { getUserData } = require('../../../database/queries/user');
+const boomify = require('../../utils/boomify');
+const { getUserData } = require('../../database/queries/user');
 
 const getUser = async (req, res, next) => {
   try {

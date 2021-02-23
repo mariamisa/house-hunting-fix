@@ -7,7 +7,7 @@ const {
   updateUserController,
   deleteUserController,
   updateUserImage,
-} = require('../controller/routes/user');
+} = require('../controller/user');
 const { updateUserValidation } = require('../middleware/validation');
 
 router.get('/user/houses', getUserHousesController);

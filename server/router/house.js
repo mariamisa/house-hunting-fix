@@ -7,7 +7,7 @@ const {
   addHouseToFav,
   deleteFavoriteHouse,
   deleteHouseController,
-} = require('../controller/routes/house');
+} = require('../controller/house');
 
 router.post('/houses', addHouseValidation, addNewHouse);
 router.get('/favorite', getFavoriteList);

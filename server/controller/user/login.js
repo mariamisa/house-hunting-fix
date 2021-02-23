@@ -1,8 +1,8 @@
 const bcrypt = require('bcrypt');
 
-const { checkUserByEmail } = require('../../../database/queries/user');
-const { signatureToken } = require('../../../utils/jwtFunctions');
-const boomify = require('../../../utils/boomify');
+const { checkUserByEmail } = require('../../database/queries/user');
+const { signatureToken } = require('../../utils/jwtFunctions');
+const boomify = require('../../utils/boomify');
 
 const loginController = async (req, res, next) => {
   const { email, password } = req.body;

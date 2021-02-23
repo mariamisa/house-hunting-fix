@@ -1,5 +1,5 @@
-const { updateUserImageData } = require('../../../database/queries/user');
-const { cloudinary } = require('../../../utils/cloudinary');
+const { updateUserImageData } = require('../../database/queries/user');
+const { cloudinary } = require('../../utils/cloudinary');
 
 const updateUserImage = async (req, res, next) => {
   try {

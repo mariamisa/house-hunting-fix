@@ -1,5 +1,5 @@
-const { addHouseToFavList } = require('../../../database/queries/house');
-const boomify = require('../../../utils/boomify');
+const { addHouseToFavList } = require('../../database/queries/house');
+const boomify = require('../../utils/boomify');
 
 const addHouseToFav = async (req, res, next) => {
   try {

@@ -1,4 +1,4 @@
-const { addNewHouse } = require('../../../database/queries/house');
+const { addNewHouse } = require('../../database/queries/house');
 
 const addNewHouseController = async (req, res, next) => {
   try {

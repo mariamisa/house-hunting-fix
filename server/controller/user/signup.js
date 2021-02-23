@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 
-const { checkUserByEmail, addUser } = require('../../../database/queries/user');
-const boomify = require('../../../utils/boomify');
+const { checkUserByEmail, addUser } = require('../../database/queries/user');
+const boomify = require('../../utils/boomify');
 
 const signupController = async (req, res, next) => {
   try {

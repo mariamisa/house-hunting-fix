@@ -1,4 +1,4 @@
-const { deleteUser } = require('../../../database/queries/user');
+const { deleteUser } = require('../../database/queries/user');
 
 const deleteUserController = async (req, res, next) => {
   try {

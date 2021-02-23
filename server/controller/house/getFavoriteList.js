@@ -1,4 +1,4 @@
-const { getFavoriteHouses } = require('../../../database/queries/house');
+const { getFavoriteHouses } = require('../../database/queries/house');
 
 const getFavoriteList = async (req, res, next) => {
   try {

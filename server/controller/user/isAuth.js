@@ -1,5 +1,5 @@
-const boomify = require('../../../utils/boomify');
-const { verifying } = require('../../../utils/jwtFunctions');
+const boomify = require('../../utils/boomify');
+const { verifying } = require('../../utils/jwtFunctions');
 
 const authController = async (req, res, next) => {
   try {
@@ -11,7 +11,7 @@ const authController = async (req, res, next) => {
       isAuth: true,
     });
   } catch (error) {
-    return next(boomify(401, 'unautherized'));
+    return next(boomify(401, 'unauthorized'));
   }
 };
 

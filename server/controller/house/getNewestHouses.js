@@ -1,4 +1,4 @@
-const { getNewestHousesData } = require('../../../database/queries/house');
+const { getNewestHousesData } = require('../../database/queries/house');
 
 const getNewestHouses = async (req, res, next) => {
   try {

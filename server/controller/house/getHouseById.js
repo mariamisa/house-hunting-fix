@@ -1,5 +1,5 @@
-const { getHouseData } = require('../../../database/queries/house');
-const boomify = require('../../../utils/boomify');
+const { getHouseData } = require('../../database/queries/house');
+const boomify = require('../../utils/boomify');
 
 const getHouseById = async (req, res, next) => {
   try {
