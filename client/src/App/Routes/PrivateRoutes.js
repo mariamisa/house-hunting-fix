@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import AuthContext from '../../Context/AuthContext';
+import { AuthContext } from '../../Context/Authorization';
 import { LOGIN_PAGE } from '../../Utils/routes.constant';
 
 function PrivateRoute({ component: Component, ...rest }) {

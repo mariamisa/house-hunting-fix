@@ -9,7 +9,7 @@ import Button from '../../Components/Button';
 import { ReactComponent as SearchImg } from '../../Utils/images/house_searching.svg';
 import Loading from '../../Components/Loading';
 
-import AuthContext from '../../Context/AuthContext';
+import { AuthContext } from '../../Context/Authorization';
 import useStyles from './style';
 
 function Login() {

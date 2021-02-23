@@ -15,7 +15,7 @@ import { HOME_PAGE } from '../../Utils/routes.constant';
 import RelatedHouse from './RelatedHouse';
 import { fakeImage } from '../../Utils/staticData';
 import Loading from '../../Components/Loading';
-import AuthContext from '../../Context/AuthContext';
+import { AuthContext } from '../../Context/Authorization';
 
 function DetailsHouse() {
   const { isAuth } = useContext(AuthContext);

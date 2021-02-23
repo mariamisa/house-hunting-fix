@@ -3,7 +3,7 @@ import { element } from 'prop-types';
 import Alert from '@material-ui/lab/Alert';
 import Header from '../../Components/Navbar';
 import Footer from '../../Components/Footer';
-import AuthContext from '../../Context/AuthContext';
+import { AuthContext } from '../../Context/Authorization';
 import Loading from '../../Components/Loading';
 import useStyles from './style';
 

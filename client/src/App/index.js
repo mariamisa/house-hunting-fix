@@ -30,7 +30,7 @@ import Profile from '../Pages/Profile';
 import ContactUs from '../Pages/ContactUs';
 import AboutUs from '../Pages/AboutUs';
 import NotFound from '../Pages/NotFound';
-import { PrivateRoute, LoggedOutRoutes } from '../Components/Route';
+import { PrivateRoutes, LoggedOutRoutes } from './Routes';
 
 function App() {
   return (
@@ -60,8 +60,8 @@ function App() {
               path={SIGNUP_PAGE}
               component={Register}
             />
-            <PrivateRoute path={PROFILE} component={Profile} />
-            <PrivateRoute path={FAVORITE} component={Favorite} />
+            <PrivateRoutes path={PROFILE} component={Profile} />
+            <PrivateRoutes path={FAVORITE} component={Favorite} />
             <Route>
               <NotFound />
             </Route>

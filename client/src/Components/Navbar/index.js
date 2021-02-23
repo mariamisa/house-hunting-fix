@@ -24,7 +24,7 @@ import {
   ABOUT_US,
   CONTACT_US,
 } from '../../Utils/routes.constant';
-import AuthContext from '../../Context/AuthContext';
+import { AuthContext } from '../../Context/Authorization';
 
 function Navbar() {
   const classes = useStyles();

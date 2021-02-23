@@ -4,11 +4,10 @@ import PropTypes from 'prop-types';
 
 import { HOME_PAGE } from '../../Utils/routes.constant';
 
-import AuthContext from '../../Context/AuthContext';
+import { AuthContext } from '../../Context/Authorization';
 
 function LoggedOutRoutes({ component: Component, restricted, ...rest }) {
   const { isAuth, authLoading } = useContext(AuthContext);
-  console.log(isAuth);
   if (!isAuth && restricted && !authLoading) {
     return (
       <Route {...rest}>

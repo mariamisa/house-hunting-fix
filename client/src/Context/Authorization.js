@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 import Axios from 'axios';
 import PropTypes from 'prop-types';
-import AuthContext from './AuthContext';
+
+export const AuthContext = createContext();
 
 function AuthProvider({ children }) {
   const [isAuth, setIsAuth] = useState(false);

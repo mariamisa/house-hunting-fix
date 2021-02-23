@@ -12,7 +12,7 @@ import { HOME_PAGE } from '../../../Utils/routes.constant';
 import Loading from '../../../Components/Loading';
 import ViewUserInfo from './ViewUserinfo';
 import useStyles from './style';
-import AuthContext from '../../../Context/AuthContext';
+import { AuthContext } from '../../../Context/Authorization';
 
 function UserInfo({ getUserName }) {
   const classes = useStyles();
