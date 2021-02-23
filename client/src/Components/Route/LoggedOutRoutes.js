@@ -2,22 +2,25 @@ import React, { useContext } from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import AuthContext from '../../Context/AuthContext';
-import { LOGIN_PAGE } from '../../Utils/routes.constant';
+import { HOME_PAGE } from '../../Utils/routes.constant';
 
-function PrivateRoute({ component: Component, ...rest }) {
+import AuthContext from '../../Context/AuthContext';
+
+function LoggedOutRoutes({ component: Component, restricted, ...rest }) {
   const { isAuth, authLoading } = useContext(AuthContext);
-  if (isAuth && !authLoading) {
+  console.log(isAuth);
+  if (!isAuth && restricted && !authLoading) {
     return (
       <Route {...rest}>
         <Component />
       </Route>
     );
   }
-  return <Redirect to={LOGIN_PAGE} />;
+  return <Redirect to={HOME_PAGE} />;
 }
-PrivateRoute.propTypes = {
+LoggedOutRoutes.propTypes = {
   component: PropTypes.func.isRequired,
+  restricted: PropTypes.bool.isRequired,
 };
 
-export default PrivateRoute;
+export default LoggedOutRoutes;

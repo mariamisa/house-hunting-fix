@@ -6,16 +6,18 @@ import AuthContext from './AuthContext';
 function AuthProvider({ children }) {
   const [isAuth, setIsAuth] = useState(false);
   const [error, setError] = useState();
-  const [authLoading, setAuthLoading] = useState(false);
+  const [authLoading, setAuthLoading] = useState(true);
 
   useEffect(() => {
+    let isCurrent = true;
     (async () => {
       try {
         setError(null);
-        setAuthLoading(true);
         await Axios('/api/v1/is-auth');
-        setIsAuth(true);
-        setAuthLoading(false);
+        if (isCurrent) {
+          setIsAuth(true);
+          setAuthLoading(false);
+        }
       } catch (err) {
         setAuthLoading(false);
         if (err.response.status === 401) {
@@ -27,6 +29,9 @@ function AuthProvider({ children }) {
         }
       }
     })();
+    return () => {
+      isCurrent = false;
+    };
   }, [isAuth]);
 
   return (

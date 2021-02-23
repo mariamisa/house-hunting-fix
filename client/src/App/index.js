@@ -30,7 +30,7 @@ import Profile from '../Pages/Profile';
 import ContactUs from '../Pages/ContactUs';
 import AboutUs from '../Pages/AboutUs';
 import NotFound from '../Pages/NotFound';
-import { PrivateRoute, PublicRoute } from '../Components/Route';
+import { PrivateRoute, LoggedOutRoutes } from '../Components/Route';
 
 function App() {
   return (
@@ -54,8 +54,12 @@ function App() {
             <Route path={`${HOUSES}/:houseId`}>
               <DetailsHouse />
             </Route>
-            <PublicRoute path={LOGIN_PAGE} component={Login} />
-            <PublicRoute path={SIGNUP_PAGE} component={Register} />
+            <LoggedOutRoutes restricted path={LOGIN_PAGE} component={Login} />
+            <LoggedOutRoutes
+              restricted
+              path={SIGNUP_PAGE}
+              component={Register}
+            />
             <PrivateRoute path={PROFILE} component={Profile} />
             <PrivateRoute path={FAVORITE} component={Favorite} />
             <Route>

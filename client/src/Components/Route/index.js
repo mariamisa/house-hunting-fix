@@ -1,4 +1,4 @@
 import PrivateRoute from './PrivateRoute';
-import PublicRoute from './PublicRoute';
+import LoggedOutRoutes from './LoggedOutRoutes';
 
-export { PrivateRoute, PublicRoute };
+export { PrivateRoute, LoggedOutRoutes };
