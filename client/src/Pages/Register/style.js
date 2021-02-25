@@ -36,6 +36,9 @@ const useStyles = makeStyles({
   input: {
     width: 500,
     marginBottom: 30,
+    '& p': {
+      color: 'red',
+    },
   },
   button: {
     width: 500,

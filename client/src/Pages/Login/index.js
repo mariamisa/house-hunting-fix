@@ -20,6 +20,7 @@ function Login() {
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState();
   const [error, setError] = useState();
+  const [validationError, setValidationError] = useState('');
 
   const clear = () => {
     setEmail('');
@@ -52,8 +53,18 @@ function Login() {
       setIsLoading(false);
       setIsAuth(true);
     } catch (err) {
-      setError(err.response ? err.response.data.message : err.errors[0]);
       setIsLoading(false);
+      if (err.inner) {
+        const isError = err.inner.reduce(
+          (acc, item) => ({ ...acc, [item.path]: item.message }),
+          {}
+        );
+        setValidationError({ ...isError });
+      } else {
+        setError(
+          err.response ? err.response.data.message : 'some error happened'
+        );
+      }
     }
   };
 
@@ -74,6 +85,7 @@ function Login() {
             value={email}
             type="email"
             label="Email"
+            helperText={validationError.email}
             required
           />
           <Input
@@ -83,6 +95,7 @@ function Login() {
             onChange={handlePassword}
             value={password}
             label="Password"
+            helperText={validationError.password}
             required
           />
           {error && (

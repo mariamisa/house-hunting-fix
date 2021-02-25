@@ -22,7 +22,8 @@ function Register() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [mobile, setMobile] = useState('');
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState();
+  const [error, setError] = useState('');
+  const [validationError, setValidationError] = useState('');
   const [open, setOpen] = useState(false);
 
   const clear = () => {
@@ -31,7 +32,8 @@ function Register() {
     setPassword('');
     setMobile('');
     setConfirmPassword('');
-    setError(null);
+    setError('');
+    setValidationError('');
   };
 
   const handleClose = (reason) => {
@@ -63,9 +65,8 @@ function Register() {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async () => {
     try {
-      e.preventDefault();
       setLoading(true);
       const userDate = {
         username,
@@ -78,13 +79,24 @@ function Register() {
       await validationSchema.validate(userDate, {
         abortEarly: false,
       });
-      await Axios.post('api/v1/signup', userDate);
+      await Axios.post('/api/v1/signup', userDate);
       setOpen(true);
       clear();
       setLoading(false);
     } catch (err) {
-      setError(err.response ? err.response.data.message : err.errors[0]);
       setLoading(false);
+      if (err.inner) {
+        const isError = err.inner.reduce(
+          (acc, item) => ({ ...acc, [item.path]: item.message }),
+          {}
+        );
+        setValidationError({ ...isError });
+      } else {
+        setValidationError('');
+        setError(
+          err.response ? err.response.data.message : 'some error happened'
+        );
+      }
     }
   };
 
@@ -111,6 +123,7 @@ function Register() {
             onChange={handleChange}
             label="user name"
             name="username"
+            helperText={validationError.username}
             required
           />
           <Input
@@ -121,6 +134,7 @@ function Register() {
             value={email}
             label="Email"
             name="email"
+            helperText={validationError.email}
             required
           />
           <Input
@@ -131,6 +145,7 @@ function Register() {
             value={password}
             label="password"
             name="password"
+            helperText={validationError.password}
             required
           />
           <Input
@@ -141,6 +156,7 @@ function Register() {
             value={confirmPassword}
             label="confirm password"
             name="confirmPassword"
+            helperText={validationError.confirmPassword}
             required
           />
           <Input
@@ -151,14 +167,17 @@ function Register() {
             value={mobile}
             label="mobile"
             name="mobile"
+            helperText={validationError.mobile}
             required
           />
+          {error && (
+            <Alert className={classes.alert} severity="error">
+              {error}
+            </Alert>
+          )}
           <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-            <Alert
-              className={classes.alert}
-              severity={error ? 'error' : 'success'}
-            >
-              {error || 'Congrats! Signed up Successfully'}
+            <Alert className={classes.alert} severity="success">
+              Congrats! Signed up Successfully
             </Alert>
           </Snackbar>
           <Button
