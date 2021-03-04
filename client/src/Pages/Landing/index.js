@@ -46,7 +46,7 @@ function Landing() {
       setLoading(true);
       const { docs } = await db.collection('houses').get();
       const getAllHouses = docs.map((doc) => doc.data());
-      setHousesFirebase(getAllHouses[0].title ? getAllHouses : []);
+      setHousesFirebase(getAllHouses);
       setLoading(false);
     } catch (err2) {
       setErrorMsg('firebases error');
