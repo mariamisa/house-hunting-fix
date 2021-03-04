@@ -9,7 +9,7 @@ import Button from '../../../Components/Button';
 import validationSchema from '../../../Utils/validations/addNewHouse';
 import { locations, categories } from '../../../Utils/staticData';
 import Loading from '../../../Components/Loading';
-
+import { db } from '../../../Utils/firebase/config';
 import useStyles from './style';
 
 function AddHouse() {
@@ -25,6 +25,7 @@ function AddHouse() {
   const [area, setArea] = useState(100);
   const [image, setImage] = useState('');
   const [loading, setLoading] = useState(false);
+  const [loadingFire, setLoadingFire] = useState(false);
   const [error, setError] = useState('');
   const [open, setOpen] = useState(false);
 
@@ -86,7 +87,6 @@ function AddHouse() {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      setLoading(true);
       setError('');
       const houseData = {
         title,
@@ -99,14 +99,16 @@ function AddHouse() {
         area,
         image,
       };
-
-      setLoading(true);
-
       await validationSchema.validate(houseData, { abortEarly: false });
-
-      await Axios.post(`/api/v1/houses`, houseData);
-
-      setLoading(false);
+      if (e.target.name === 'server') {
+        setLoading(true);
+        await Axios.post(`/api/v1/houses`, houseData);
+        setLoading(false);
+      } else {
+        setLoadingFire(true);
+        await db.collection('houses').add(houseData);
+        setLoadingFire(false);
+      }
       clear();
       setOpen(true);
     } catch (err) {
@@ -255,9 +257,19 @@ function AddHouse() {
           className={classes.button}
           variant="contained"
           color="primary"
+          name="server"
           onClick={handleSubmit}
         >
           {loading ? <Loading color="primary" /> : 'Add'}
+        </Button>
+        <Button
+          className={classes.button}
+          variant="contained"
+          color="primary"
+          name="firebase"
+          onClick={handleSubmit}
+        >
+          {loadingFire ? <Loading color="primary" /> : 'Add to firebase'}
         </Button>
       </form>
     </div>
