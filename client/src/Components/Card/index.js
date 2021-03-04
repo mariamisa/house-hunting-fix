@@ -41,8 +41,8 @@ export default function CardComponent({ house }) {
     location,
     area,
     price,
-    room_num: bdCount,
-    bathroom_num: baCount,
+    room_num: rooms,
+    bathroom_num: bathrooms,
   } = house;
 
   const [error, setError] = useState();
@@ -110,11 +110,11 @@ export default function CardComponent({ house }) {
           <div className={classes.cardDetails}>
             <Typography variant="h6">${price}</Typography>
             <div className={classes.iconBox}>
-              <Typography>{bdCount} bd </Typography>
+              <Typography>{rooms} bd </Typography>
               <HotelIcon className={classes.icon} />
             </div>
             <div className={classes.iconBox}>
-              <Typography>{baCount} ba </Typography>
+              <Typography>{bathrooms} ba </Typography>
               <BathtubIcon className={classes.icon} />
             </div>
           </div>
@@ -152,8 +152,8 @@ CardComponent.propTypes = {
     title: string.isRequired,
     description: string.isRequired,
     location: string.isRequired,
-    bdCount: number.isRequired,
-    baCount: number.isRequired,
+    bathrooms: number.isRequired,
+    rooms: number.isRequired,
     price: number.isRequired,
   }).isRequired,
 };
