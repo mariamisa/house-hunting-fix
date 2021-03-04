@@ -19,6 +19,7 @@ function Landing() {
   const [houses, setHouses] = useState([]);
   const [newHouses, setNewHouses] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadingFire, setLoadingFire] = useState(true);
   const [errorMsg, setErrorMsg] = useState({});
   const [housesFirebase, setHousesFirebase] = useState([]);
 
@@ -27,7 +28,6 @@ function Landing() {
   };
   const fetchingData = async (isCurrent, { url, limit, skip }, cb) => {
     try {
-      setLoading(true);
       const { data } = await Axios.get(
         `${url}?limit=${limit || 6}&skip=${skip || 0}`
       );
@@ -41,13 +41,19 @@ function Landing() {
     }
   };
 
-  const getHousesFromFirebase = async () => {
+  const getHousesFromFirebase = async (isCurrent) => {
     try {
-      setLoading(true);
-      const { docs } = await db.collection('houses').get();
-      const getAllHouses = docs.map((doc) => doc.data());
-      setHousesFirebase(getAllHouses);
-      setLoading(false);
+      if (isCurrent) {
+        const { docs } = await db.collection('houses').get();
+        const getAllHouses = await Promise.all(
+          docs.map(async (doc) => {
+            const dataObj = await doc.data();
+            return dataObj;
+          })
+        );
+        setHousesFirebase(getAllHouses);
+        setLoadingFire(false);
+      }
     } catch (err2) {
       setErrorMsg('firebases error');
     }
@@ -55,6 +61,7 @@ function Landing() {
 
   useEffect(() => {
     let isCurrent = true;
+    getHousesFromFirebase(isCurrent);
     fetchingData(
       isCurrent,
       { url: '/api/v1/houses', limit: 6, skip: 0 },
@@ -65,7 +72,6 @@ function Landing() {
       { url: '/api/v1/newest-houses', limit: 6, skip: 0 },
       setNewHouses
     );
-    getHousesFromFirebase();
     return () => {
       isCurrent = false;
     };
@@ -123,7 +129,7 @@ function Landing() {
               <Typography variant="h2" className={classes.sectionTitle}>
                 houses on firebase
               </Typography>
-              {loading ? (
+              {loadingFire ? (
                 <div className={classes.spinner}>
                   <Loading />
                 </div>
