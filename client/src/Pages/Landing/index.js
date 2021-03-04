@@ -8,6 +8,7 @@ import { HOUSES } from '../../Utils/routes.constant';
 import CardContainer from '../../Components/CardContainer';
 import Search from '../../Components/SearchBar';
 import Loading from '../../Components/Loading';
+import { db } from '../../Utils/firebase/config';
 
 import useStyles from './style';
 
@@ -19,6 +20,7 @@ function Landing() {
   const [newHouses, setNewHouses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState({});
+  const [housesFirebase, setHousesFirebase] = useState([]);
 
   const handleSearchBar = () => {
     history.push(HOUSES);
@@ -39,6 +41,18 @@ function Landing() {
     }
   };
 
+  const getHousesFromFirebase = async () => {
+    try {
+      setLoading(true);
+      const { docs } = await db.collection('houses').get();
+      const getAllHouses = docs.map((doc) => doc.data());
+      setHousesFirebase(getAllHouses[0].title ? getAllHouses : []);
+      setLoading(false);
+    } catch (err2) {
+      setErrorMsg('firebases error');
+    }
+  };
+
   useEffect(() => {
     let isCurrent = true;
     fetchingData(
@@ -51,6 +65,7 @@ function Landing() {
       { url: '/api/v1/newest-houses', limit: 6, skip: 0 },
       setNewHouses
     );
+    getHousesFromFirebase();
     return () => {
       isCurrent = false;
     };
@@ -101,6 +116,19 @@ function Landing() {
                 </div>
               ) : (
                 <CardContainer houses={newHouses} />
+              )}
+            </div>
+            <Divider className={classes.divider} />
+            <div className={classes.housesSection}>
+              <Typography variant="h2" className={classes.sectionTitle}>
+                houses on firebase
+              </Typography>
+              {loading ? (
+                <div className={classes.spinner}>
+                  <Loading />
+                </div>
+              ) : (
+                <CardContainer houses={housesFirebase} />
               )}
             </div>
           </>
