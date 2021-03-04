@@ -253,24 +253,26 @@ function AddHouse() {
             {error}
           </Alert>
         )}
-        <Button
-          className={classes.button}
-          variant="contained"
-          color="primary"
-          name="server"
-          onClick={handleSubmit}
-        >
-          {loading ? <Loading color="primary" /> : 'Add'}
-        </Button>
-        <Button
-          className={classes.button}
-          variant="contained"
-          color="primary"
-          name="firebase"
-          onClick={handleSubmit}
-        >
-          {loadingFire ? <Loading color="primary" /> : 'Add to firebase'}
-        </Button>
+        <div className={classes.btnG}>
+          <Button
+            className={classes.button}
+            variant="contained"
+            color="primary"
+            name="server"
+            onClick={handleSubmit}
+          >
+            {loading ? <Loading color="primary" /> : 'Add'}
+          </Button>
+          <Button
+            className={classes.button}
+            variant="contained"
+            color="primary"
+            name="firebase"
+            onClick={handleSubmit}
+          >
+            {loadingFire ? <Loading color="primary" /> : 'Add to firebase'}
+          </Button>
+        </div>
       </form>
     </div>
   );

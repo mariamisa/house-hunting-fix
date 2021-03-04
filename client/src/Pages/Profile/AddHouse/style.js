@@ -53,9 +53,15 @@ const useStyles = makeStyles({
       width: '100%',
     },
   },
-  button: {
+  btnG: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexWrap: 'wrap',
     width: 500,
-    marginBottom: 60,
+  },
+  button: {
+    width: '48%',
+    marginBottom: 30,
     height: 45,
     fontWeight: 'bold',
     marginTop: 10,
