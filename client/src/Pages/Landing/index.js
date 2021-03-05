@@ -48,7 +48,7 @@ function Landing() {
         const getAllHouses = await Promise.all(
           docs.map(async (doc) => {
             const dataObj = await doc.data();
-            return dataObj;
+            return { id: doc.id, ...dataObj };
           })
         );
         setHousesFirebase(getAllHouses);
